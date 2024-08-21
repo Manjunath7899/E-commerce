@@ -1,12 +1,16 @@
 import {
+  ArrayMaxSize,
+  ArrayMinSize,
   IsEmail,
   IsNotEmpty,
   IsString,
   Matches,
   MaxLength,
   MinLength,
+  ValidateNested,
 } from 'class-validator';
 import { AddressDto } from './address.dto';
+import { Type } from 'class-transformer';
 
 export class RegisterDto {
   @IsNotEmpty({ message: 'Username is required' })
@@ -46,5 +50,9 @@ export class RegisterDto {
   phoneNumber: string;
 
   @IsNotEmpty({ message: 'Address is required' })
+  @ValidateNested({ each: true })
+  @Type(() => AddressDto)
+  @ArrayMinSize(1, { message: 'At least one address is required' })
+  @ArrayMaxSize(2, { message: 'Maximum address entry will be two' })
   addresses: AddressDto[];
 }

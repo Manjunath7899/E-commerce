@@ -47,6 +47,12 @@
       ],
       "lib/schemas/*": [
         "libs/schemas/src/*"
+      ],
+      "lib/security": [
+        "libs/security/src"
+      ],
+      "lib/security/*": [
+        "libs/security/src/*"
       ]
     }
   }
